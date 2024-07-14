@@ -8,7 +8,9 @@ class RecyclerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Text(
           'Route',
           style: TextStyle(
@@ -17,65 +19,69 @@ class RecyclerView extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'What do you search for?',
-                    prefixIcon: const Padding(
-                      padding: EdgeInsets.only(left: 12),
-                      child: Icon(
-                        Icons.search_rounded,
-                        size: 42,
-                        color: kPrimaryColor,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'What do you search for?',
+                      prefixIcon: const Padding(
+                        padding: EdgeInsets.only(left: 12),
+                        child: Icon(
+                          Icons.search_rounded,
+                          size: 42,
+                          color: kPrimaryColor,
+                        ),
                       ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(32),
-                      borderSide: const BorderSide(
-                        color: kPrimaryColor,
-                        width: 1.5,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        borderSide: const BorderSide(
+                          color: kPrimaryColor,
+                          width: 1.5,
+                        ),
                       ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(32),
-                      borderSide: const BorderSide(
-                        color: kPrimaryColor,
-                        width: 1.5,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        borderSide: const BorderSide(
+                          color: kPrimaryColor,
+                          width: 1.5,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                width: 18,
-              ),
-              const Icon(
-                Icons.shopping_cart_outlined,
-                size: 32,
-                color: kPrimaryColor,
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-              ),
-              itemBuilder: (context, index) {
-                return const CardItem();
-              },
+                const SizedBox(
+                  width: 18,
+                ),
+                const Icon(
+                  Icons.shopping_cart_outlined,
+                  size: 32,
+                  color: kPrimaryColor,
+                ),
+              ],
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 30,
+            ),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.7,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                ),
+                itemBuilder: (context, index) {
+                  return const CardItem();
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

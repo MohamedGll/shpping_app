@@ -8,8 +8,8 @@ class CardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
-      width: 170,
+      // height: 250,
+      // width: 170,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
