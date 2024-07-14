@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task/constant.dart';
+import 'package:flutter_task/widgets/card_item.dart';
 
 class RecyclerView extends StatelessWidget {
   const RecyclerView({super.key});
@@ -58,6 +59,21 @@ class RecyclerView extends StatelessWidget {
                 color: kPrimaryColor,
               ),
             ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+              ),
+              itemBuilder: (context, index) {
+                return const CardItem();
+              },
+            ),
           ),
         ],
       ),
