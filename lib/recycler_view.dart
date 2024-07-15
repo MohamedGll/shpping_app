@@ -69,6 +69,7 @@ class RecyclerView extends StatelessWidget {
             ),
             Expanded(
               child: GridView.builder(
+                physics: const BouncingScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.7,
