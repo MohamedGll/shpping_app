@@ -1,8 +1,8 @@
 class CardModel {
   final String brand;
   final String desc;
-  final String priceAfterDiscount;
-  final String price;
+  final double priceAfterDiscount;
+  final double price;
   final double rating;
   final String image;
 
@@ -22,7 +22,7 @@ class CardModel {
       priceAfterDiscount: json['products']['discountPercentage'],
       price: json['products']['price'],
       rating: json['products']['rating'],
-      image: json['products']['images'][0],
+      image: json['products']['images'],
     );
   }
 }

@@ -80,7 +80,7 @@ class CardItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        card.priceAfterDiscount,
+                        '${card.priceAfterDiscount}',
                         style: const TextStyle(
                           color: Colors.black,
                         ),
@@ -88,7 +88,7 @@ class CardItem extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 22),
                         child: Text(
-                          card.price,
+                          '${card.price}',
                           style: const TextStyle(
                             decoration: TextDecoration.lineThrough,
                             decorationColor: Colors.blue,
@@ -110,11 +110,11 @@ class CardItem extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 4),
                         child: Text(
-                          '${card.rating}',
-                          style: const TextStyle(
+                          '4.6',
+                          style: TextStyle(
                             color: Colors.black,
                           ),
                         ),

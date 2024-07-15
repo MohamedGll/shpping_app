@@ -72,8 +72,8 @@ class RecyclerView extends StatelessWidget {
             ),
             BlocBuilder<GetCardDetailsCubit, CardStates>(
               builder: (context, state) {
-                var cardModel =
-                    BlocProvider.of<GetCardDetailsCubit>(context).cardModel;
+                var cardModel = BlocProvider.of<GetCardDetailsCubit>(context)
+                    .getCardDetails();
                 print(cardModel);
                 if (state is CardLoadingState) {
                   return const Center(
