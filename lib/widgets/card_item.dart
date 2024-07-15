@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task/constant.dart';
+import 'package:flutter_task/models/card_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CardItem extends StatelessWidget {
-  const CardItem({super.key});
+  const CardItem({super.key, required this.card});
+  final CardModel card;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 250,
-      // width: 170,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
@@ -28,7 +28,7 @@ class CardItem extends StatelessWidget {
                     topRight: Radius.circular(16),
                   ),
                   child: Image.network(
-                    'https://th.bing.com/th/id/OIP.7SeMY3g9G_4NuDeEHBz8DgAAAA?rs=1&pid=ImgDetMain',
+                    card.image,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -59,37 +59,37 @@ class CardItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Nike Air Jordan',
-                    style: TextStyle(
+                  Text(
+                    card.brand,
+                    style: const TextStyle(
                       color: Colors.black,
                     ),
                   ),
-                  const Text(
+                  Text(
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    'Nike shoesflexible for work',
-                    style: TextStyle(
+                    card.desc,
+                    style: const TextStyle(
                       color: Colors.black,
                     ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'EGP 1,200',
-                        style: TextStyle(
+                        card.priceAfterDiscount,
+                        style: const TextStyle(
                           color: Colors.black,
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(right: 22),
+                        padding: const EdgeInsets.only(right: 22),
                         child: Text(
-                          '2000 EGP',
-                          style: TextStyle(
+                          card.price,
+                          style: const TextStyle(
                             decoration: TextDecoration.lineThrough,
                             decorationColor: Colors.blue,
                             color: Colors.blue,
@@ -110,11 +110,11 @@ class CardItem extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 4),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4),
                         child: Text(
-                          '(4.6)',
-                          style: TextStyle(
+                          '${card.rating}',
+                          style: const TextStyle(
                             color: Colors.black,
                           ),
                         ),
@@ -150,3 +150,4 @@ class CardItem extends StatelessWidget {
     );
   }
 }
+//https://th.bing.com/th/id/OIP.7SeMY3g9G_4NuDeEHBz8DgAAAA?rs=1&pid=ImgDetMain

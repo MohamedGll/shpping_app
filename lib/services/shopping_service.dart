@@ -11,6 +11,7 @@ class CardService {
       Response response = await dio.get('https://dummyjson.com/products');
 
       CardModel cardModel = CardModel.fromJson(response.data);
+
       return cardModel;
     } on DioException catch (e) {
       final String errorMessage = e.response?.data['error']['message'] ??

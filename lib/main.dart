@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_task/cubits/get_card_details_cubit/get_card_details_cubit.dart';
 import 'package:flutter_task/recycler_view.dart';
 
 void main() {
@@ -10,9 +12,12 @@ class ShoppingApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: RecyclerView(),
+    return BlocProvider(
+      create: (context) => GetCardDetailsCubit(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: RecyclerView(),
+      ),
     );
   }
 }

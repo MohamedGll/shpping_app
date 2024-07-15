@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task/constant.dart';
-import 'package:flutter_task/widgets/card_item.dart';
+import 'package:flutter_task/cubits/get_card_details_cubit/get_card_details_cubit.dart';
+import 'package:flutter_task/cubits/get_card_details_cubit/get_card_details_state.dart';
+import 'package:flutter_task/widgets/custom_grid_view.dart';
 
 class RecyclerView extends StatelessWidget {
   const RecyclerView({super.key});
@@ -67,19 +70,25 @@ class RecyclerView extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            Expanded(
-              child: GridView.builder(
-                physics: const BouncingScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.7,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                ),
-                itemBuilder: (context, index) {
-                  return const CardItem();
-                },
-              ),
+            BlocBuilder<GetCardDetailsCubit, CardStates>(
+              builder: (context, state) {
+                var cardModel =
+                    BlocProvider.of<GetCardDetailsCubit>(context).cardModel;
+                print(cardModel);
+                if (state is CardLoadingState) {
+                  return const Center(
+                      child: CircularProgressIndicator(
+                    color: kPrimaryColor,
+                  ));
+                } else if (state is CardFailureState) {
+                  return const Text('opps, there was an error');
+                } else if (state is CardInitialState) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return CustomGridView(
+                  cardModel: cardModel!,
+                );
+              },
             ),
           ],
         ),

@@ -3,7 +3,8 @@ class CardModel {
   final String desc;
   final String priceAfterDiscount;
   final String price;
-  final String rating;
+  final double rating;
+  final String image;
 
   CardModel({
     required this.brand,
@@ -11,6 +12,7 @@ class CardModel {
     required this.priceAfterDiscount,
     required this.price,
     required this.rating,
+    required this.image,
   });
 
   factory CardModel.fromJson(json) {
@@ -20,6 +22,7 @@ class CardModel {
       priceAfterDiscount: json['products']['discountPercentage'],
       price: json['products']['price'],
       rating: json['products']['rating'],
+      image: json['products']['images'][0],
     );
   }
 }
