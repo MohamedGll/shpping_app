@@ -1,22 +1,22 @@
+import 'dart:convert';
 import 'dart:developer';
-import 'package:dio/dio.dart';
 import 'package:flutter_task/models/card_model.dart';
+import 'package:http/http.dart' as http;
 
 class CardService {
-  final Dio dio;
-  CardService(this.dio);
-
-  Future<CardModel> getCardDetails() async {
+  Future<List<CardModel>> getCardDetails() async {
     try {
-      Response response = await dio.get('https://dummyjson.com/products');
+      http.Response response = await http.get(
+        Uri.parse('https://dummyjson.com/products'),
+      );
 
-      CardModel cardModel = CardModel.fromJson(response.data);
+      List<dynamic> data = jsonDecode(response.body);
 
-      return cardModel;
-    } on DioException catch (e) {
-      final String errorMessage = e.response?.data['error']['message'] ??
-          'oops there was an error, try later';
-      throw Exception(errorMessage);
+      List<CardModel> cardList = [];
+      for (int i = 0; i < data.length; i++) {
+        cardList.add(CardModel.fromJson(data[i]));
+      }
+      return cardList;
     } catch (e) {
       log(e.toString());
       throw Exception('oops there was an error, try later');

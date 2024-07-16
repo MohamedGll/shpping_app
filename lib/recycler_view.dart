@@ -3,10 +3,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task/constant.dart';
 import 'package:flutter_task/cubits/get_card_details_cubit/get_card_details_cubit.dart';
 import 'package:flutter_task/cubits/get_card_details_cubit/get_card_details_state.dart';
-import 'package:flutter_task/widgets/custom_grid_view.dart';
+import 'package:flutter_task/models/card_model.dart';
+import 'package:flutter_task/widgets/card_item.dart';
 
-class RecyclerView extends StatelessWidget {
+class RecyclerView extends StatefulWidget {
   const RecyclerView({super.key});
+
+  @override
+  State<RecyclerView> createState() => _RecyclerViewState();
+}
+
+class _RecyclerViewState extends State<RecyclerView> {
+  List<CardModel> cardList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
+    cardList =
+        await BlocProvider.of<GetCardDetailsCubit>(context).getCardDetails();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +91,6 @@ class RecyclerView extends StatelessWidget {
             ),
             BlocBuilder<GetCardDetailsCubit, CardStates>(
               builder: (context, state) {
-                var cardModel = BlocProvider.of<GetCardDetailsCubit>(context)
-                    .getCardDetails();
-                print(cardModel);
                 if (state is CardLoadingState) {
                   return const Center(
                       child: CircularProgressIndicator(
@@ -85,8 +101,23 @@ class RecyclerView extends StatelessWidget {
                 } else if (state is CardInitialState) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                return CustomGridView(
-                  cardModel: cardModel!,
+                return Expanded(
+                  child: GridView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.7,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                    ),
+                    itemBuilder: (context, index) {
+                      return CardItem(
+                        card: cardList[index],
+                      );
+                    },
+                    itemCount: cardList.length,
+                  ),
                 );
               },
             ),

@@ -22,7 +22,7 @@ class CardModel {
       priceAfterDiscount: json['products']['discountPercentage'],
       price: json['products']['price'],
       rating: json['products']['rating'],
-      image: json['products']['images'],
+      image: json['products']['images'][0],
     );
   }
 }
